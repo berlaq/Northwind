@@ -31,7 +31,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name="category_id")
     private Category category;
-    
-//    @OneToMany(mappedBy = "product")
-//    private List<OrderDetails> orderDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Suppliers  suppliers;
 }

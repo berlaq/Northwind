@@ -15,5 +15,6 @@ public class ProductListResponse {
     private int unitInStock;
     private int categoryId;
     private String categoryName;
+    private String supplierName;
 
 }

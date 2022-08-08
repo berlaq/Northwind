@@ -32,6 +32,7 @@ public class ProductManager implements ProductService {
            responseProduct.setUnitInStock(product.getUnitInStock());
            responseProduct.setCategoryId(product.getCategory().getCategoryId());
            responseProduct.setCategoryName(product.getCategory().getCategoryName());
+           responseProduct.setSupplierName(product.getSuppliers().getCompanyName());
            productsDTO.add(responseProduct);
        }
        return  productsDTO;
