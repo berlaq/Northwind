@@ -28,8 +28,5 @@ public class Order {
     @JoinColumn(name="employee_id")
     private Employee employee;
     
-    @OneToMany(mappedBy = "order")
-    private List<OrderDetails> orderDetail;
-    
 
 }

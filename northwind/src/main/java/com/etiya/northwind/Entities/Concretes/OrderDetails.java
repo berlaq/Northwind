@@ -24,36 +24,29 @@ import lombok.NoArgsConstructor;
 @Data
 @IdClass(OrderDetailsId.class)
 public class OrderDetails implements Serializable {
+
+
 	@Id
-	//@Column(name="order_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ManyToOne
-	@JoinColumn(name="order_id", columnDefinition = "order")
+	@JoinColumn(name = "order_id")
 	private Order order;
-	
+
 	@Id
-	//@Column(name="product_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ManyToOne
-	@JoinColumn(name="product_id", columnDefinition = "product")
+	@JoinColumn(name = "product_id")
 	private Product product;
 	
 	@Column(name="unit_price")
 	private double unitPrice;
 
-	public OrderDetails(Order order, Product product, double unitPrice) {
-		super();
-		this.order = order;
-		this.product = product;
-		this.unitPrice = unitPrice;
-	}
 
 	public OrderDetails() {
 		super();
 	}
-	
-	
-	
-	
 
+	public OrderDetails( Order order, Product product, double unitPrice) {
+		this.order = order;
+		this.product = product;
+		this.unitPrice = unitPrice;
+	}
 }

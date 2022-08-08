@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
 
 public class OrderDetailsId implements Serializable{
 
-	private int orderId;
-	private int productId;
+
+	private Order order;
+	private Product product;
 	
-	public OrderDetailsId(int orderId, int productId) {
+	public OrderDetailsId(Order order, Product product) {
 		super();
-		this.orderId = orderId;
-		this.productId = productId;
+		this.order = order;
+		this.product = product;
 	}
 
 	public OrderDetailsId() {
@@ -33,12 +34,12 @@ public class OrderDetailsId implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		OrderDetailsId other = (OrderDetailsId) obj;
-		return orderId == other.orderId && productId == other.productId;
+		return order == other.order && product == other.product;
 	}
 
     @Override
 	public int hashCode() {
-		return Objects.hash(orderId, productId);
+		return Objects.hash(order, order);
 	}
     
     
