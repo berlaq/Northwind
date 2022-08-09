@@ -56,24 +56,24 @@ public class CustomerController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateProd(@RequestBody CustomerListResponse customerListResponse ){
+    public ResponseEntity<String> updateCustomer(@RequestBody CustomerListResponse customerListResponse ){
         this.customerService.updateCustomer(customerListResponse);
         return ResponseEntity.ok("Customer is updated");
     }
 
     @DeleteMapping("/{customerId}")
-    public ResponseEntity<String> deleteProd(@PathVariable String customerId ){
+    public ResponseEntity<String> deleteCustomer(@PathVariable String customerId ){
         this.customerService.deleteCustomer(customerId);
         return ResponseEntity.ok("Customer is deleted");
     }
 
     @GetMapping("/{customerId}")
-    public ResponseEntity<CustomerListResponse> getProd(@PathVariable String customerId){
+    public ResponseEntity<CustomerListResponse> getCustomer(@PathVariable String customerId){
         return ResponseEntity.ok(this.customerService.getCustomerById(customerId));
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String > createProd(@RequestBody CustomerListResponse customerListResponse){
+    public ResponseEntity<String > createCustomer(@RequestBody CustomerListResponse customerListResponse){
         this.customerService.addCustomer(customerListResponse);
         return  ResponseEntity.ok("Customer is added");
     }

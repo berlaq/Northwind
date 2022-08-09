@@ -12,5 +12,5 @@ public class OrderListResponse {
     private int orderId;
     private String customerId;
     private int employeeId;
-    private String fullName;
+
 }
