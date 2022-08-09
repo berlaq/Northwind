@@ -40,6 +40,10 @@ public class OrderDetails implements Serializable {
 	@Column(name="unit_price")
 	private double unitPrice;
 
+	@ManyToOne
+	private Product product;
 
+	@ManyToOne
+	private Order order;
 
 }

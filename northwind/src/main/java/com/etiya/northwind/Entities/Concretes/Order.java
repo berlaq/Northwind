@@ -31,4 +31,6 @@ public class Order {
     @ManyToOne
     private OrderDetails orderDetails;
 
+    @ManyToOne
+    private Product product;
 }

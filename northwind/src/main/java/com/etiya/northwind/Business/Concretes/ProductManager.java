@@ -43,7 +43,7 @@ public class ProductManager implements ProductService {
 
     @Override
     public void updateProduct(ProductListResponse productListResponse) {
-        productRepository.save(modelMapperService.forRequest().map(productListResponse, Product.class));
+        productRepository.save(modelMapperService.forResponse().map(productListResponse, Product.class));
     }
 
     @Override
@@ -56,7 +56,7 @@ public class ProductManager implements ProductService {
         var temp = this.productRepository.getReferenceById(productId);
         ProductListResponse productListResponse = modelMapperService.forResponse()
                 .map(temp, ProductListResponse.class);
-        //productListResponse.setSupplierName(temp.getSuppliers().getCompanyName());
+
         return productListResponse;
     }
 

@@ -14,7 +14,6 @@ public class ProductListResponse {
     private double unitPrice;
     private int unitInStock;
     private int categoryId;
-
     private int supplierId;
 
 }

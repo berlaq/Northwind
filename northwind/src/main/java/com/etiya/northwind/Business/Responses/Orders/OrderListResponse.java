@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class OrderListResponse {
 
     private int orderId;
+    private int productId;
     private String customerId;
     private int employeeId;
 

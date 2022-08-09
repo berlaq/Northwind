@@ -1,6 +1,7 @@
 package com.etiya.northwind.Business.Concretes;
 
 import com.etiya.northwind.Business.Responses.Orders.OrderListResponse;
+import com.etiya.northwind.DataAccess.Abstracts.OrderDetailsRepository;
 import com.etiya.northwind.Entities.Concretes.Order;
 import com.etiya.northwind.DataAccess.Abstracts.OrderRepository;
 import com.etiya.northwind.Business.Abstracts.OrderService;
@@ -20,11 +21,13 @@ import java.util.stream.Collectors;
 public class OrderManager implements OrderService {
     private OrderRepository orderRepository;
     private ModelMapperService modelMapperService;
+    private OrderDetailsRepository orderDetailsRepository;
 
     @Autowired
-    public OrderManager(OrderRepository orderRepository, ModelMapperService modelMapperService) {
+    public OrderManager(OrderRepository orderRepository, ModelMapperService modelMapperService, OrderDetailsRepository orderDetailsRepository) {
         this.orderRepository = orderRepository;
         this.modelMapperService = modelMapperService;
+        this.orderDetailsRepository = orderDetailsRepository;
     }
 
     @Override
@@ -39,7 +42,9 @@ public class OrderManager implements OrderService {
 
     @Override
     public void updateOrder(OrderListResponse orderListResponse) {
-        orderRepository.save(modelMapperService.forRequest().map(orderListResponse, Order.class));
+        var temp = modelMapperService.forResponse().map(orderListResponse, Order.class);
+        temp.getOrderDetails().setProductId(temp.getProduct().getProductId());
+        orderRepository.save(temp);
     }
 
     @Override
@@ -56,7 +61,10 @@ public class OrderManager implements OrderService {
 
     @Override
     public void addOrder(OrderListResponse orderListResponse) {
-        this.orderRepository.save(modelMapperService.forRequest().map(orderListResponse, Order.class));
+        var temp = modelMapperService.forResponse().map(orderListResponse, Order.class);
+//        temp.getOrderDetails().setProductId(temp.getProduct().getProductId());
+//        temp.getOrderDetails().setOrderId(temp.getOrderId());
+        this.orderRepository.saveAndFlush(temp);
     }
 
     @Override
