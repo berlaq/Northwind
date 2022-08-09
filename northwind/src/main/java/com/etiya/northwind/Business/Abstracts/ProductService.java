@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface ProductService {
     List<ProductListResponse> getAll();
-    void updateProduct(OrderListResponse orderListResponse);
-    void deleteOrder(int orderId);
-    OrderListResponse getOrderById(int orderId);
-    void addOrder(OrderListResponse orderListResponse);
+    void updateProduct(ProductListResponse productListResponse);
+    void deleteProduct(int productId);
+    ProductListResponse getProductById(int productId);
+    void addProduct(ProductListResponse productListResponse);
 
-    Page<OrderListResponse> getAllByPage(int page, int size);
-    Page<OrderListResponse>  getAllByPageWithField(int page,int size,String field);
-    Page<OrderListResponse>  getAllByPageWithOrder(int page,int size,String field,String order);
+    Page<ProductListResponse> getAllByPage(int page, int size);
+    Page<ProductListResponse>  getAllByPageWithField(int page,int size,String field);
+    Page<ProductListResponse>  getAllByPageWithOrder(int page,int size,String field,String order);
 
 }

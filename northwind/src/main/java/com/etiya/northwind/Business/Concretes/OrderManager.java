@@ -1,8 +1,6 @@
 package com.etiya.northwind.Business.Concretes;
 
-import com.etiya.northwind.Business.Responses.Employees.EmployeeListResponse;
 import com.etiya.northwind.Business.Responses.Orders.OrderListResponse;
-import com.etiya.northwind.Entities.Concretes.Employee;
 import com.etiya.northwind.Entities.Concretes.Order;
 import com.etiya.northwind.DataAccess.Abstracts.OrderRepository;
 import com.etiya.northwind.Business.Abstracts.OrderService;
@@ -14,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;

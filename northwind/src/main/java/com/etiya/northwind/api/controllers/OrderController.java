@@ -25,7 +25,7 @@ public class OrderController {
 
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateEmployee(@RequestBody OrderListResponse orderListResponse ){
+    public ResponseEntity<String> updateOrder(@RequestBody OrderListResponse orderListResponse ){
         this.orderService.updateOrder(orderListResponse);
         return ResponseEntity.ok("Order is updated");
     }
