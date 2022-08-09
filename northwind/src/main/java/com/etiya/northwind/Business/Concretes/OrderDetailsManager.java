@@ -2,7 +2,9 @@ package com.etiya.northwind.Business.Concretes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,24 +19,20 @@ import com.etiya.northwind.Entities.Concretes.OrderDetails;
 public class OrderDetailsManager implements OrderDetailService{
 
 	private OrderDetailsRepository orderDetailsRepository;
-	
+	private ModelMapperService modelMapperService;
+
 	@Autowired
-	private OrderDetailsManager (OrderDetailsRepository orderDetailsRepository) {
+	public OrderDetailsManager(OrderDetailsRepository orderDetailsRepository, ModelMapperService modelMapperService) {
 		this.orderDetailsRepository = orderDetailsRepository;
+		this.modelMapperService = modelMapperService;
 	}
-	
+
 	@Override
 	public List<OrderDetailsListResponse> getAll() {
 		List<OrderDetails> orderDetails = orderDetailsRepository.findAll();
-		List<OrderDetailsListResponse> orderDetailListResponses = new ArrayList<>();
-		for(OrderDetails orderDetail : orderDetails) {
-			OrderDetailsListResponse orderDetailsLR = new OrderDetailsListResponse();
-			orderDetailsLR.setOrderId(orderDetail.getOrder().getOrderId());
-			orderDetailsLR.setProductId(orderDetail.getProduct().getProductId());
-			orderDetailsLR.setUnitPrice(orderDetail.getUnitPrice());
-			
-			orderDetailListResponses.add(orderDetailsLR);
-		}
+		List<OrderDetailsListResponse> orderDetailListResponses = orderDetails.stream()
+				.map(orderDetail -> modelMapperService.forResponse().map(orderDetail,OrderDetailsListResponse.class))
+				.collect(Collectors.toList());
 		return orderDetailListResponses;
 	}
 

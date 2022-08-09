@@ -18,10 +18,13 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name="order_details")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @IdClass(OrderDetailsId.class)
 public class OrderDetails implements Serializable {
 
@@ -40,13 +43,5 @@ public class OrderDetails implements Serializable {
 	private double unitPrice;
 
 
-	public OrderDetails() {
-		super();
-	}
 
-	public OrderDetails( Order order, Product product, double unitPrice) {
-		this.order = order;
-		this.product = product;
-		this.unitPrice = unitPrice;
-	}
 }

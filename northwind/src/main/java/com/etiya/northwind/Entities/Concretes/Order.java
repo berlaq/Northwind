@@ -27,6 +27,8 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="employee_id")
     private Employee employee;
-    
+
+    @ManyToOne
+    private OrderDetails orderDetails;
 
 }
