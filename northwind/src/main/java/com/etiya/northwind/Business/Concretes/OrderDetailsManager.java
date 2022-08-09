@@ -2,10 +2,16 @@ package com.etiya.northwind.Business.Concretes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.etiya.northwind.Entities.Concretes.Order;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.etiya.northwind.Business.Abstracts.OrderDetailService;
@@ -36,4 +42,71 @@ public class OrderDetailsManager implements OrderDetailService{
 		return orderDetailListResponses;
 	}
 
+	@Override
+	public void updateOrderDetail(OrderDetailsListResponse orderDetailsListResponse) {
+
+		orderDetailsRepository.save(modelMapperService.forRequest().map(orderDetailsListResponse,OrderDetails.class));
+
+	}
+
+	@Override
+	public void deleteOrderDetail(int orderId) {
+		this.orderDetailsRepository.deleteById(orderId);
+
+	}
+
+	@Override
+	public OrderDetailsListResponse getOrderDetailById(int orderId) {
+		OrderDetailsListResponse orderDetailsListResponse = modelMapperService.forResponse()
+				.map(this.orderDetailsRepository.getReferenceById(orderId), OrderDetailsListResponse.class);
+		return orderDetailsListResponse;
+	}
+
+	@Override
+	public void addOrderDetail(OrderDetailsListResponse orderDetailsListResponse) {
+		this.orderDetailsRepository.save(modelMapperService.forRequest().map(orderDetailsListResponse, OrderDetails.class));
+
+	}
+
+	@Override
+	public Page<OrderDetailsListResponse> getAllByPage(int page, int size) {
+		Pageable pageable = PageRequest.of(page,size);
+		var tempOrder = orderDetailsRepository.findAll(pageable);
+		Page<OrderDetailsListResponse> orderDetailsListResponses = tempOrder.map(new Function<OrderDetails, OrderDetailsListResponse>() {
+			@Override
+			public OrderDetailsListResponse apply(OrderDetails orderDetails) {
+				OrderDetailsListResponse  orderDetailsListResponse = modelMapperService.forResponse().map(orderDetails,OrderDetailsListResponse.class);
+				return orderDetailsListResponse;
+			}
+		});
+		return orderDetailsListResponses;
+	}
+
+	@Override
+	public Page<OrderDetailsListResponse> getAllByPageWithField(int page, int size, String field) {
+		Pageable pageable = PageRequest.of(page,size,Sort.by(field));
+		var tempOrder = orderDetailsRepository.findAll(pageable);
+		Page<OrderDetailsListResponse> orderDetailsListResponses = tempOrder.map(new Function<OrderDetails, OrderDetailsListResponse>() {
+			@Override
+			public OrderDetailsListResponse apply(OrderDetails orderDetails) {
+				OrderDetailsListResponse  orderDetailsListResponse = modelMapperService.forResponse().map(orderDetails,OrderDetailsListResponse.class);
+				return orderDetailsListResponse;
+			}
+		});
+		return orderDetailsListResponses;
+	}
+
+	@Override
+	public Page<OrderDetailsListResponse> getAllByPageWithOrder(int page, int size, String field, String order) {
+		Pageable pageable = PageRequest.of(page,size, Sort.by(Sort.Direction.fromString(order),field));
+		var tempOrder = orderDetailsRepository.findAll(pageable);
+		Page<OrderDetailsListResponse> orderDetailsListResponses = tempOrder.map(new Function<OrderDetails, OrderDetailsListResponse>() {
+			@Override
+			public OrderDetailsListResponse apply(OrderDetails orderDetails) {
+				OrderDetailsListResponse  orderDetailsListResponse = modelMapperService.forResponse().map(orderDetails,OrderDetailsListResponse.class);
+				return orderDetailsListResponse;
+			}
+		});
+		return orderDetailsListResponses;
+	}
 }

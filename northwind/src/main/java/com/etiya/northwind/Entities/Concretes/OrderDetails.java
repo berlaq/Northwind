@@ -30,14 +30,12 @@ public class OrderDetails implements Serializable {
 
 
 	@Id
-	@ManyToOne
 	@JoinColumn(name = "order_id")
-	private Order order;
+	private int orderId;
 
 	@Id
-	@ManyToOne
 	@JoinColumn(name = "product_id")
-	private Product product;
+	private int productId;
 	
 	@Column(name="unit_price")
 	private double unitPrice;
