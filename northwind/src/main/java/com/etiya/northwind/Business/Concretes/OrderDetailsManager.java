@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.etiya.northwind.Business.Responses.OrderDetails.OrderDetailidResponse;
 import com.etiya.northwind.Business.requests.OrderDetail.CreateOrderDetailRequest;
 import com.etiya.northwind.Entities.Concretes.Order;
+import com.etiya.northwind.Entities.Concretes.OrderDetailsId;
+import com.etiya.northwind.Entities.Concretes.Product;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,15 +54,19 @@ public class OrderDetailsManager implements OrderDetailService{
 	}
 
 	@Override
-	public void deleteOrderDetail(int orderId) {
-		this.orderDetailsRepository.deleteById(orderId);
+	public void deleteOrderDetail(int orderId,int productId) {
+		OrderDetailsId orderDetailsId = new OrderDetailsId(orderId,productId);
+		this.orderDetailsRepository.deleteById(orderDetailsId);
 
 	}
 
 	@Override
-	public OrderDetailsListResponse getOrderDetailById(int orderId) {
+	public OrderDetailsListResponse getOrderDetailById(int orderId,int productId) {
+		OrderDetailsId orderDetailsId = new OrderDetailsId(orderId,productId);
+		var temp = this.orderDetailsRepository.getReferenceById(orderDetailsId);
 		OrderDetailsListResponse orderDetailsListResponse = modelMapperService.forResponse()
-				.map(this.orderDetailsRepository.getReferenceById(orderId), OrderDetailsListResponse.class);
+				.map(temp, OrderDetailsListResponse.class);
+
 		return orderDetailsListResponse;
 	}
 

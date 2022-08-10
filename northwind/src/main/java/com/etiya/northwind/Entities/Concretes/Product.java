@@ -38,4 +38,7 @@ public class Product {
 
     @ManyToOne
     private Order order;
+
+    @OneToMany
+    private List<OrderDetails> orderDetail;
 }

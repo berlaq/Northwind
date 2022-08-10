@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,24 +28,24 @@ public class ProductsController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateProduct(@RequestBody ProductListResponse productListResponse ){
+    public ResponseEntity<String> updateProduct(@RequestBody @Valid ProductListResponse productListResponse ){
         this.productService.updateProduct(productListResponse);
         return ResponseEntity.ok("Product is updated");
     }
 
     @DeleteMapping("/{productId}")
-    public ResponseEntity<String> deleteProduct(@PathVariable int productId ){
+    public ResponseEntity<String> deleteProduct(@PathVariable @Valid int productId ){
         this.productService.deleteProduct(productId);
         return ResponseEntity.ok("Product is deleted");
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<ProductListResponse> getProduct(@PathVariable int productId){
+    public ResponseEntity<ProductListResponse> getProduct(@PathVariable @Valid int productId){
         return ResponseEntity.ok(this.productService.getProductById(productId));
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String > createProduct(@RequestBody CreateProductRequest createProductRequest){
+    public ResponseEntity<String > createProduct(@RequestBody @Valid CreateProductRequest createProductRequest){
         this.productService.addProduct(createProductRequest);
         return  ResponseEntity.ok("Product is added");
     }

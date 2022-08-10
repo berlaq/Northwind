@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import com.etiya.northwind.Business.Abstracts.OrderDetailService;
 import com.etiya.northwind.Business.Responses.OrderDetails.OrderDetailsListResponse;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/orderDetails")
 public class OrderDetailsController {
@@ -22,7 +24,7 @@ public class OrderDetailsController {
 		this.orderDetailService = orderDetailService;
 	}
 	@PutMapping("/update")
-	public ResponseEntity<String> updateOrderDetail(@RequestBody OrderDetailsListResponse orderDetailsListResponse ){
+	public ResponseEntity<String> updateOrderDetail(@RequestBody @Valid OrderDetailsListResponse orderDetailsListResponse ){
 		this.orderDetailService.updateOrderDetail(orderDetailsListResponse);
 		return ResponseEntity.ok("OrderDETAİL is updated");
 	}
@@ -32,19 +34,19 @@ public class OrderDetailsController {
 		return orderDetailService.getAll();
 	}
 
-	@DeleteMapping("/{orderId}")
-	public ResponseEntity<String> deleteOrderDetail(@PathVariable int orderId ){
-		this.orderDetailService.deleteOrderDetail(orderId);
+	@DeleteMapping("/delete")
+	public ResponseEntity<String> deleteOrderDetail(@RequestParam  int orderId , @RequestParam int productId){
+		this.orderDetailService.deleteOrderDetail(orderId,productId);
 		return ResponseEntity.ok("OrderDETAİL is deleted");
 	}
 
-	@GetMapping("/{orderId}")
-	public ResponseEntity<OrderDetailsListResponse> getOrderDetail(@PathVariable int orderId){
-		return ResponseEntity.ok(this.orderDetailService.getOrderDetailById(orderId));
+	@GetMapping("/getOrderDetailById")
+	public ResponseEntity<OrderDetailsListResponse> getOrderDetail(@RequestParam  int orderId,@RequestParam int productId){
+		return ResponseEntity.ok(this.orderDetailService.getOrderDetailById(orderId,productId));
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<String > createOrderDetail(@RequestBody CreateOrderDetailRequest createOrderDetailRequest){
+	public ResponseEntity<String > createOrderDetail(@RequestBody @Valid CreateOrderDetailRequest createOrderDetailRequest){
 		this.orderDetailService.addOrderDetail(createOrderDetailRequest);
 		return  ResponseEntity.ok("OrderDETAİL is added");
 	}

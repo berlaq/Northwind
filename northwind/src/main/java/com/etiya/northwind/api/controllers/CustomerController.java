@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -57,24 +58,24 @@ public class CustomerController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateCustomer(@RequestBody CustomerListResponse customerListResponse ){
+    public ResponseEntity<String> updateCustomer(@RequestBody @Valid CustomerListResponse customerListResponse ){
         this.customerService.updateCustomer(customerListResponse);
         return ResponseEntity.ok("Customer is updated");
     }
 
     @DeleteMapping("/{customerId}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable String customerId ){
+    public ResponseEntity<String> deleteCustomer(@PathVariable @Valid String customerId ){
         this.customerService.deleteCustomer(customerId);
         return ResponseEntity.ok("Customer is deleted");
     }
 
     @GetMapping("/{customerId}")
-    public ResponseEntity<CustomerListResponse> getCustomer(@PathVariable String customerId){
+    public ResponseEntity<CustomerListResponse> getCustomer(@PathVariable @Valid String customerId){
         return ResponseEntity.ok(this.customerService.getCustomerById(customerId));
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String > createCustomer(@RequestBody CreateCustomerRequest createCustomerRequest){
+    public ResponseEntity<String > createCustomer(@RequestBody @Valid CreateCustomerRequest createCustomerRequest){
         this.customerService.addCustomer(createCustomerRequest);
         return  ResponseEntity.ok("Customer is added");
     }

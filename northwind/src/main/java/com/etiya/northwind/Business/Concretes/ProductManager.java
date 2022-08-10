@@ -36,15 +36,12 @@ public class ProductManager implements ProductService {
                .stream()
                        .map(product -> this.modelMapperService.forResponse().map(product,ProductListResponse.class))
                        .collect(Collectors.toList());
-       //for(int i = 0; i<productsDTO.size();i++){
-           //productsDTO.get(i).setSupplierName(products.get(i).getSuppliers().getCompanyName());
-       //}
        return  productsDTO;
     }
 
     @Override
     public void updateProduct(ProductListResponse productListResponse) {
-        productRepository.save(modelMapperService.forResponse().map(productListResponse, Product.class));
+        productRepository.save(modelMapperService.forRequest().map(productListResponse, Product.class));
     }
 
     @Override
@@ -82,7 +79,7 @@ public class ProductManager implements ProductService {
 
     @Override
     public Page<ProductListResponse> getAllByPageWithField(int page, int size, String field) {
-        Pageable pageable = PageRequest.of(page,size, Sort.by(field));;
+        Pageable pageable = PageRequest.of(page,size, Sort.by(field));
         var tempProduct = productRepository.findAll(pageable);
         Page<ProductListResponse> productListResponses = tempProduct.map(new Function<Product, ProductListResponse>() {
             @Override

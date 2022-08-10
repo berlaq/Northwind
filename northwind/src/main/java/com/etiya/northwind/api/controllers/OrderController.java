@@ -28,19 +28,19 @@ public class OrderController {
 
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateOrder(@RequestBody OrderListResponse orderListResponse ){
+    public ResponseEntity<String> updateOrder(@RequestBody @Valid OrderListResponse orderListResponse ){
         this.orderService.updateOrder(orderListResponse);
         return ResponseEntity.ok("Order is updated");
     }
 
     @DeleteMapping("/{orderId}")
-    public ResponseEntity<String> deleteOrder(@PathVariable int orderId ){
+    public ResponseEntity<String> deleteOrder(@PathVariable @Valid int orderId ){
         this.orderService.deleteOrder(orderId);
         return ResponseEntity.ok("Order is deleted");
     }
 
     @GetMapping("/{orderId}")
-    public ResponseEntity<OrderListResponse> getOrder(@PathVariable int orderId){
+    public ResponseEntity<OrderListResponse> getOrder(@PathVariable @Valid int orderId){
         return ResponseEntity.ok(this.orderService.getOrderById(orderId));
     }
 

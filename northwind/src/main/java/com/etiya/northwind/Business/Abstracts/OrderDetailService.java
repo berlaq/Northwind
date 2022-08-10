@@ -11,8 +11,8 @@ public interface OrderDetailService {
 	List<OrderDetailsListResponse> getAll();
 
 	void updateOrderDetail(OrderDetailsListResponse orderDetailsListResponse);
-	void deleteOrderDetail(int orderId);
-	OrderDetailsListResponse getOrderDetailById(int orderId);
+	void deleteOrderDetail(int orderId,int productId);
+	OrderDetailsListResponse getOrderDetailById(int orderId,int productId);
 	void addOrderDetail(CreateOrderDetailRequest createOrderDetailRequest);
 
 	Page<OrderDetailsListResponse> getAllByPage(int page, int size);

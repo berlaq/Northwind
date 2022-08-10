@@ -21,5 +21,5 @@ public class CreateOrderDetailRequest {
     private double unitPrice;
 
     @NotNull
-    private String productName;
+    private int quantity;
 }

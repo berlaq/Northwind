@@ -30,11 +30,11 @@ public class OrderDetails implements Serializable {
 
 
 	@Id
-	@JoinColumn(name = "order_id")
+	@PrimaryKeyJoinColumn
 	private int orderId;
 
 	@Id
-	@JoinColumn(name = "product_id")
+	@PrimaryKeyJoinColumn
 	private int productId;
 	
 	@Column(name="unit_price")

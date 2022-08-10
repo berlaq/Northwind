@@ -46,7 +46,7 @@ public class SupplierController {
     @PostMapping("/create")
     public ResponseEntity<String > createSupplier(@RequestBody CreateSupplierRequest createSupplierRequest){
         this.supplierService.addSupplier(createSupplierRequest);
-        return  ResponseEntity.ok("Product is added");
+        return  ResponseEntity.ok("Supplier is added");
     }
 
     @GetMapping("/getAllByPage")

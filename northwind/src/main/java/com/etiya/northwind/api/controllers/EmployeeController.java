@@ -8,8 +8,10 @@ import com.etiya.northwind.Business.requests.Employee.CreateEmployeeRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,24 +30,24 @@ public class EmployeeController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateEmployee(@RequestBody EmployeeListResponse employeeListResponse ){
+    public ResponseEntity<String> updateEmployee(@RequestBody @Valid EmployeeListResponse employeeListResponse ){
         this.employeeService.updateEmployee(employeeListResponse);
         return ResponseEntity.ok("Employee is updated");
     }
 
     @DeleteMapping("/{employeeId}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable int employeeId ){
+    public ResponseEntity<String> deleteEmployee(@PathVariable @Valid int employeeId ){
         this.employeeService.deleteEmployee(employeeId);
         return ResponseEntity.ok("Employee is deleted");
     }
 
     @GetMapping("/{employeeId}")
-    public ResponseEntity<EmployeeListResponse> getEmployee(@PathVariable int employeeId){
+    public ResponseEntity<EmployeeListResponse> getEmployee(@PathVariable @Valid int employeeId){
         return ResponseEntity.ok(this.employeeService.getEmployeeById(employeeId));
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String > createEmployee(@RequestBody CreateEmployeeRequest createEmployeeRequest){
+    public ResponseEntity<String > createEmployee(@RequestBody @Valid CreateEmployeeRequest createEmployeeRequest){
         this.employeeService.addEmployee(createEmployeeRequest);
         return  ResponseEntity.ok("Employee is added");
     }
