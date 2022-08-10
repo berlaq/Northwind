@@ -1,7 +1,9 @@
 package com.etiya.northwind.Business.Concretes;
 
 import com.etiya.northwind.Business.Responses.Orders.OrderListResponse;
+import com.etiya.northwind.Business.requests.orders.CreateOrderRequest;
 import com.etiya.northwind.DataAccess.Abstracts.OrderDetailsRepository;
+import com.etiya.northwind.Entities.Concretes.Customer;
 import com.etiya.northwind.Entities.Concretes.Order;
 import com.etiya.northwind.DataAccess.Abstracts.OrderRepository;
 import com.etiya.northwind.Business.Abstracts.OrderService;
@@ -21,13 +23,12 @@ import java.util.stream.Collectors;
 public class OrderManager implements OrderService {
     private OrderRepository orderRepository;
     private ModelMapperService modelMapperService;
-    private OrderDetailsRepository orderDetailsRepository;
+
 
     @Autowired
-    public OrderManager(OrderRepository orderRepository, ModelMapperService modelMapperService, OrderDetailsRepository orderDetailsRepository) {
+    public OrderManager(OrderRepository orderRepository, ModelMapperService modelMapperService) {
         this.orderRepository = orderRepository;
         this.modelMapperService = modelMapperService;
-        this.orderDetailsRepository = orderDetailsRepository;
     }
 
     @Override
@@ -60,10 +61,11 @@ public class OrderManager implements OrderService {
     }
 
     @Override
-    public void addOrder(OrderListResponse orderListResponse) {
-        var temp = modelMapperService.forResponse().map(orderListResponse, Order.class);
-//        temp.getOrderDetails().setProductId(temp.getProduct().getProductId());
-//        temp.getOrderDetails().setOrderId(temp.getOrderId());
+    public void addOrder(CreateOrderRequest createOrderRequest) {
+        var temp = modelMapperService.forRequest().map(createOrderRequest, Order.class);
+        Customer customer = new Customer();
+        customer.setCustomerId(createOrderRequest.getCustomerId());
+        temp.setCustomers(customer);
         this.orderRepository.saveAndFlush(temp);
     }
 

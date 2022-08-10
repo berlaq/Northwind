@@ -2,6 +2,7 @@ package com.etiya.northwind.Business.Abstracts;
 
 import com.etiya.northwind.Business.Responses.Employees.EmployeeListResponse;
 import com.etiya.northwind.Business.Responses.Orders.OrderListResponse;
+import com.etiya.northwind.Business.requests.orders.CreateOrderRequest;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface OrderService {
     void updateOrder(OrderListResponse orderListResponse);
     void deleteOrder(int orderId);
     OrderListResponse getOrderById(int orderId);
-    void addOrder(OrderListResponse orderListResponse);
+    void addOrder(CreateOrderRequest createOrderRequest);
 
     Page<OrderListResponse> getAllByPage(int page, int size);
     Page<OrderListResponse>  getAllByPageWithField(int page,int size,String field);

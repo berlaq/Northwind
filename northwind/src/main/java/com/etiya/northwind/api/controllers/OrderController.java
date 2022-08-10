@@ -3,10 +3,13 @@ package com.etiya.northwind.api.controllers;
 import com.etiya.northwind.Business.Responses.Employees.EmployeeListResponse;
 import com.etiya.northwind.Business.Responses.Orders.OrderListResponse;
 import com.etiya.northwind.Business.Abstracts.OrderService;
+import com.etiya.northwind.Business.requests.orders.CreateOrderRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -42,8 +45,8 @@ public class OrderController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String > createOrder(@RequestBody OrderListResponse orderListResponse){
-        this.orderService.addOrder(orderListResponse);
+    public ResponseEntity<String > createOrder(@RequestBody @Valid CreateOrderRequest createOrderRequest){
+        this.orderService.addOrder(createOrderRequest);
         return  ResponseEntity.ok("Order is added");
     }
 
