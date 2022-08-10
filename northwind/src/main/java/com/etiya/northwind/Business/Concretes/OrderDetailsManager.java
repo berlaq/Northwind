@@ -31,6 +31,7 @@ public class OrderDetailsManager implements OrderDetailService{
 	private OrderDetailsRepository orderDetailsRepository;
 	private ModelMapperService modelMapperService;
 
+
 	@Autowired
 	public OrderDetailsManager(OrderDetailsRepository orderDetailsRepository, ModelMapperService modelMapperService) {
 		this.orderDetailsRepository = orderDetailsRepository;
@@ -55,18 +56,15 @@ public class OrderDetailsManager implements OrderDetailService{
 
 	@Override
 	public void deleteOrderDetail(int orderId,int productId) {
-		OrderDetailsId orderDetailsId = new OrderDetailsId(orderId,productId);
-		this.orderDetailsRepository.deleteById(orderDetailsId);
+		this.orderDetailsRepository.deleteById(new OrderDetailsId(orderId,productId));
 
 	}
 
 	@Override
 	public OrderDetailsListResponse getOrderDetailById(int orderId,int productId) {
-		OrderDetailsId orderDetailsId = new OrderDetailsId(orderId,productId);
-		var temp = this.orderDetailsRepository.getReferenceById(orderDetailsId);
+		var orderDetails = this.orderDetailsRepository.getReferenceById(new OrderDetailsId(orderId,productId));
 		OrderDetailsListResponse orderDetailsListResponse = modelMapperService.forResponse()
-				.map(temp, OrderDetailsListResponse.class);
-
+				.map(orderDetails, OrderDetailsListResponse.class);
 		return orderDetailsListResponse;
 	}
 

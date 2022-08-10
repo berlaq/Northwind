@@ -15,4 +15,5 @@ public class OrderDetailsListResponse {
 	
 	private double unitPrice;
 
+	private String productName;
 }

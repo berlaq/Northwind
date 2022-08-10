@@ -7,13 +7,17 @@ import com.etiya.northwind.Business.requests.products.CreateProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/product")
+@Validated
 public class ProductsController {
     private ProductService productService;
 
@@ -34,13 +38,13 @@ public class ProductsController {
     }
 
     @DeleteMapping("/{productId}")
-    public ResponseEntity<String> deleteProduct(@PathVariable @Valid int productId ){
+    public ResponseEntity<String> deleteProduct(@PathVariable @NotNull int productId ){
         this.productService.deleteProduct(productId);
         return ResponseEntity.ok("Product is deleted");
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<ProductListResponse> getProduct(@PathVariable @Valid int productId){
+    public ResponseEntity<ProductListResponse> getProduct(@PathVariable @Max(5) int productId){
         return ResponseEntity.ok(this.productService.getProductById(productId));
     }
 

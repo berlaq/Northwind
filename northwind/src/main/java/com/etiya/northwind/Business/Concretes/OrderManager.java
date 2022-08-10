@@ -44,7 +44,7 @@ public class OrderManager implements OrderService {
     @Override
     public void updateOrder(OrderListResponse orderListResponse) {
         var temp = modelMapperService.forResponse().map(orderListResponse, Order.class);
-        temp.getOrderDetails().setProductId(temp.getProduct().getProductId());
+        //temp.getOrderDetails().setProductId(temp.getProduct().getProductId());
         orderRepository.save(temp);
     }
 
