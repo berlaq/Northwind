@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.etiya.northwind.Business.Responses.OrderDetails.OrderDetailsListResponse;
 import com.etiya.northwind.Business.Responses.Orders.OrderListResponse;
+import com.etiya.northwind.Business.requests.OrderDetail.CreateOrderDetailRequest;
 import org.springframework.data.domain.Page;
 
 public interface OrderDetailService {
@@ -12,7 +13,7 @@ public interface OrderDetailService {
 	void updateOrderDetail(OrderDetailsListResponse orderDetailsListResponse);
 	void deleteOrderDetail(int orderId);
 	OrderDetailsListResponse getOrderDetailById(int orderId);
-	void addOrderDetail(OrderDetailsListResponse orderDetailsListResponse);
+	void addOrderDetail(CreateOrderDetailRequest createOrderDetailRequest);
 
 	Page<OrderDetailsListResponse> getAllByPage(int page, int size);
 	Page<OrderDetailsListResponse>  getAllByPageWithField(int page,int size,String field);

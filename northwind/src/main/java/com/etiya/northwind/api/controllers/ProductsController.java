@@ -3,6 +3,7 @@ package com.etiya.northwind.api.controllers;
 import com.etiya.northwind.Business.Abstracts.ProductService;
 import com.etiya.northwind.Business.Responses.Orders.OrderListResponse;
 import com.etiya.northwind.Business.Responses.Products.ProductListResponse;
+import com.etiya.northwind.Business.requests.products.CreateProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +44,8 @@ public class ProductsController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String > createProduct(@RequestBody ProductListResponse productListResponse){
-        this.productService.addProduct(productListResponse);
+    public ResponseEntity<String > createProduct(@RequestBody CreateProductRequest createProductRequest){
+        this.productService.addProduct(createProductRequest);
         return  ResponseEntity.ok("Product is added");
     }
 

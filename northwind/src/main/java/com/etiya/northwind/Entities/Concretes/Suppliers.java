@@ -21,7 +21,7 @@ public class Suppliers {
     @Column(name = "company_name")
     private String companyName;
 
-    @OneToMany(mappedBy = "suppliers")
+    @OneToMany(mappedBy = "supplier")
     private List<Product> products;
 
 

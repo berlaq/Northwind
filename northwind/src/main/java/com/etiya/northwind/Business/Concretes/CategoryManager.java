@@ -2,6 +2,7 @@ package com.etiya.northwind.Business.Concretes;
 
 import com.etiya.northwind.Business.Abstracts.CategoryService;
 import com.etiya.northwind.Business.Responses.Category.CategoryListResponse;
+import com.etiya.northwind.Business.requests.Category.CreateCategoryRequest;
 import com.etiya.northwind.DataAccess.Abstracts.CategoryRepository;
 import com.etiya.northwind.Entities.Concretes.Category;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
@@ -50,7 +51,7 @@ public class CategoryManager implements CategoryService {
     }
 
     @Override
-    public void addCategory(CategoryListResponse categoryListResponse) {
-        categoryRepository.save(modelMapperService.forRequest().map(categoryListResponse,Category.class));
+    public void addCategory(CreateCategoryRequest createCategoryRequest) {
+        categoryRepository.save(modelMapperService.forRequest().map(createCategoryRequest,Category.class));
     }
 }

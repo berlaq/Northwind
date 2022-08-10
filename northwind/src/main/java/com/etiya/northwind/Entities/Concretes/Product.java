@@ -34,7 +34,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")
-    private Suppliers suppliers;
+    private Suppliers supplier;
 
     @ManyToOne
     private Order order;

@@ -4,6 +4,7 @@ package com.etiya.northwind.api.controllers;
 import com.etiya.northwind.Business.Responses.Customers.CustomerListResponse;
 import com.etiya.northwind.Business.Abstracts.CustomerService;
 import com.etiya.northwind.Business.Responses.Products.ProductListResponse;
+import com.etiya.northwind.Business.requests.customers.CreateCustomerRequest;
 import com.etiya.northwind.Entities.Concretes.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -73,8 +74,8 @@ public class CustomerController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String > createCustomer(@RequestBody CustomerListResponse customerListResponse){
-        this.customerService.addCustomer(customerListResponse);
+    public ResponseEntity<String > createCustomer(@RequestBody CreateCustomerRequest createCustomerRequest){
+        this.customerService.addCustomer(createCustomerRequest);
         return  ResponseEntity.ok("Customer is added");
     }
 

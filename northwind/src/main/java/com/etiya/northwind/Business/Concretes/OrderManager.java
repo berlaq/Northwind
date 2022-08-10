@@ -63,10 +63,7 @@ public class OrderManager implements OrderService {
     @Override
     public void addOrder(CreateOrderRequest createOrderRequest) {
         var temp = modelMapperService.forRequest().map(createOrderRequest, Order.class);
-        Customer customer = new Customer();
-        customer.setCustomerId(createOrderRequest.getCustomerId());
-        temp.setCustomers(customer);
-        this.orderRepository.saveAndFlush(temp);
+        this.orderRepository.save(temp);
     }
 
     @Override

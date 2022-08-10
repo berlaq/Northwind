@@ -3,6 +3,7 @@ package com.etiya.northwind.Business.Concretes;
 
 import com.etiya.northwind.Business.Responses.Customers.CustomerListResponse;
 import com.etiya.northwind.Business.Responses.Employees.EmployeeListResponse;
+import com.etiya.northwind.Business.requests.Employee.CreateEmployeeRequest;
 import com.etiya.northwind.Entities.Concretes.Customer;
 import com.etiya.northwind.Entities.Concretes.Employee;
 import com.etiya.northwind.DataAccess.Abstracts.EmployeeRepository;
@@ -59,8 +60,8 @@ public class EmployeeManager implements EmployeeService {
     }
 
     @Override
-    public void addEmployee(EmployeeListResponse employeeListResponse) {
-        this.employeeRepository.save(modelMapperService.forRequest().map(employeeListResponse, Employee.class));
+    public void addEmployee(CreateEmployeeRequest createEmployeeRequest) {
+        this.employeeRepository.save(modelMapperService.forRequest().map(createEmployeeRequest, Employee.class));
     }
 
     @Override

@@ -1,10 +1,9 @@
 package com.etiya.northwind.Business.Concretes;
 
 import com.etiya.northwind.Business.Abstracts.SupplierService;
-import com.etiya.northwind.Business.Responses.Products.ProductListResponse;
 import com.etiya.northwind.Business.Responses.Suppliers.SupplierListResponse;
+import com.etiya.northwind.Business.requests.Supplier.CreateSupplierRequest;
 import com.etiya.northwind.DataAccess.Abstracts.SupplierRepository;
-import com.etiya.northwind.Entities.Concretes.Product;
 import com.etiya.northwind.Entities.Concretes.Suppliers;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -59,9 +57,8 @@ public class SupplierManager implements SupplierService {
     }
 
     @Override
-    public void addSupplier(SupplierListResponse supplierListResponse) {
-        this.supplierRepository.save(modelMapperService.forRequest().map(supplierListResponse, Suppliers.class));
-
+    public void addSupplier(CreateSupplierRequest createSupplierRequest) {
+        this.supplierRepository.save(modelMapperService.forRequest().map(createSupplierRequest, Suppliers.class));
     }
 
     @Override

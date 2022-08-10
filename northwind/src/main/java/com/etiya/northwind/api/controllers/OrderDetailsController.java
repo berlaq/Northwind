@@ -3,6 +3,7 @@ package com.etiya.northwind.api.controllers;
 import java.util.List;
 
 import com.etiya.northwind.Business.Responses.Suppliers.SupplierListResponse;
+import com.etiya.northwind.Business.requests.OrderDetail.CreateOrderDetailRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -43,8 +44,8 @@ public class OrderDetailsController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<String > createOrderDetail(@RequestBody OrderDetailsListResponse orderDetailsListResponse){
-		this.orderDetailService.addOrderDetail(orderDetailsListResponse);
+	public ResponseEntity<String > createOrderDetail(@RequestBody CreateOrderDetailRequest createOrderDetailRequest){
+		this.orderDetailService.addOrderDetail(createOrderDetailRequest);
 		return  ResponseEntity.ok("OrderDETAİL is added");
 	}
 

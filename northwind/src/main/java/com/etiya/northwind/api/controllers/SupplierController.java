@@ -2,8 +2,8 @@ package com.etiya.northwind.api.controllers;
 
 
 import com.etiya.northwind.Business.Abstracts.SupplierService;
-import com.etiya.northwind.Business.Responses.Products.ProductListResponse;
 import com.etiya.northwind.Business.Responses.Suppliers.SupplierListResponse;
+import com.etiya.northwind.Business.requests.Supplier.CreateSupplierRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -44,8 +44,8 @@ public class SupplierController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String > createSupplier(@RequestBody SupplierListResponse supplierListResponse){
-        this.supplierService.addSupplier(supplierListResponse);
+    public ResponseEntity<String > createSupplier(@RequestBody CreateSupplierRequest createSupplierRequest){
+        this.supplierService.addSupplier(createSupplierRequest);
         return  ResponseEntity.ok("Product is added");
     }
 

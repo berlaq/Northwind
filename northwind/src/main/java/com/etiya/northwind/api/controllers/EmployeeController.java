@@ -4,6 +4,7 @@ package com.etiya.northwind.api.controllers;
 import com.etiya.northwind.Business.Responses.Customers.CustomerListResponse;
 import com.etiya.northwind.Business.Responses.Employees.EmployeeListResponse;
 import com.etiya.northwind.Business.Abstracts.EmployeeService;
+import com.etiya.northwind.Business.requests.Employee.CreateEmployeeRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -44,8 +45,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String > createEmployee(@RequestBody EmployeeListResponse employeeListResponse){
-        this.employeeService.addEmployee(employeeListResponse);
+    public ResponseEntity<String > createEmployee(@RequestBody CreateEmployeeRequest createEmployeeRequest){
+        this.employeeService.addEmployee(createEmployeeRequest);
         return  ResponseEntity.ok("Employee is added");
     }
 

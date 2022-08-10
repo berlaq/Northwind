@@ -1,6 +1,7 @@
 package com.etiya.northwind.Business.Concretes;
 
 import com.etiya.northwind.Business.Responses.Customers.CustomerListResponse;
+import com.etiya.northwind.Business.requests.customers.CreateCustomerRequest;
 import com.etiya.northwind.Entities.Concretes.Customer;
 import com.etiya.northwind.DataAccess.Abstracts.CustomerRepository;
 import com.etiya.northwind.Business.Abstracts.CustomerService;
@@ -100,8 +101,8 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
-    public void addCustomer(CustomerListResponse customerListResponse) {
-        this.customerRepository.save(modelMapperService.forRequest().map(customerListResponse, Customer.class));
+    public void addCustomer(CreateCustomerRequest createCustomerRequest) {
+        this.customerRepository.save(modelMapperService.forRequest().map(createCustomerRequest, Customer.class));
 
     }
 }

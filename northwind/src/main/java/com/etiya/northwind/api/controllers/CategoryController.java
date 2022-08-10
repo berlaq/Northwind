@@ -2,6 +2,7 @@ package com.etiya.northwind.api.controllers;
 
 import com.etiya.northwind.Business.Abstracts.CategoryService;
 import com.etiya.northwind.Business.Responses.Category.CategoryListResponse;
+import com.etiya.northwind.Business.requests.Category.CreateCategoryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +43,8 @@ public class CategoryController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String > createCategory(@RequestBody CategoryListResponse categoryListResponse){
-        this.categoryService.addCategory(categoryListResponse);
+    public ResponseEntity<String > createCategory(@RequestBody CreateCategoryRequest createCategoryRequest){
+        this.categoryService.addCategory(createCategoryRequest);
         return  ResponseEntity.ok("Category is added");
     }
 }

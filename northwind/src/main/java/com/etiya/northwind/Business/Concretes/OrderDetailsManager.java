@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.etiya.northwind.Business.requests.OrderDetail.CreateOrderDetailRequest;
 import com.etiya.northwind.Entities.Concretes.Order;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,9 +64,8 @@ public class OrderDetailsManager implements OrderDetailService{
 	}
 
 	@Override
-	public void addOrderDetail(OrderDetailsListResponse orderDetailsListResponse) {
-		this.orderDetailsRepository.save(modelMapperService.forRequest().map(orderDetailsListResponse, OrderDetails.class));
-
+	public void addOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) {
+		this.orderDetailsRepository.save(modelMapperService.forRequest().map(createOrderDetailRequest, OrderDetails.class));
 	}
 
 	@Override

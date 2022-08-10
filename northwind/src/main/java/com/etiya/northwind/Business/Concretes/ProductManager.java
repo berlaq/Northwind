@@ -1,6 +1,7 @@
 package com.etiya.northwind.Business.Concretes;
 
 import com.etiya.northwind.Business.Responses.Products.ProductListResponse;
+import com.etiya.northwind.Business.requests.products.CreateProductRequest;
 import com.etiya.northwind.DataAccess.Abstracts.ProductRepository;
 import com.etiya.northwind.Entities.Concretes.Product;
 import com.etiya.northwind.Business.Abstracts.ProductService;
@@ -61,8 +62,8 @@ public class ProductManager implements ProductService {
     }
 
     @Override
-    public void addProduct(ProductListResponse productListResponse) {
-        this.productRepository.save(modelMapperService.forRequest().map(productListResponse, Product.class));
+    public void addProduct(CreateProductRequest createProductRequest) {
+        this.productRepository.save(modelMapperService.forRequest().map(createProductRequest, Product.class));
     }
 
     @Override
