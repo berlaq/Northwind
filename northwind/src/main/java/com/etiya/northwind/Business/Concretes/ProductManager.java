@@ -63,21 +63,10 @@ public class ProductManager implements ProductService {
 
     @Override
     public Result addProduct(CreateProductRequest createProductRequest) {
-        int categoryId = createProductRequest.getCategoryId();
-        int total = 0;
-        List<Product> products = this.productRepository.findAll();
-        for (Product product : products) {
-            if (product.getCategory().getCategoryId() == categoryId) {
-                total += 1;
-            }
-        }
-        if (total < 5) {
-            this.productRepository.save(modelMapperService.forRequest().map(createProductRequest, Product.class));
-            return new SuccessResult("ürün Eklendi");
-        } else {
-            throw new BusinessException("Daha fazla ürün eklenemez");
-        }
+        checkCategorySize(createProductRequest);
 
+        this.productRepository.save(modelMapperService.forRequest().map(createProductRequest, Product.class));
+        return new SuccessResult("ürün Eklendi");
     }
 
     @Override
@@ -123,7 +112,17 @@ public class ProductManager implements ProductService {
     }
 
     private void checkCategorySize(CreateProductRequest createProductRequest){
-
+        int categoryId = createProductRequest.getCategoryId();
+        int total = 0;
+        List<Product> products = this.productRepository.findAll();
+        for (Product product : products) {
+            if (product.getCategory().getCategoryId() == categoryId) {
+                total += 1;
+            }
+        }
+        if (total < 5) {
+            throw new BusinessException("Daha fazla ürün eklenemez");
+        }
     }
 
 }
