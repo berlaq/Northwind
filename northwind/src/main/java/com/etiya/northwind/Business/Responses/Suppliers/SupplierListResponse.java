@@ -14,5 +14,7 @@ public class SupplierListResponse {
 
     private int supplierId;
     private String companyName;
+    private String city;
+    private String country;
 
 }

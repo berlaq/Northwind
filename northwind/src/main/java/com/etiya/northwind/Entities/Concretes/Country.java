@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "countries")
@@ -19,4 +20,10 @@ public class Country {
 
     @Column(name = "country_name")
     private String countryName;
+
+    @OneToMany(mappedBy = "country")
+    private List<CityCountry> countries;
+
+    @OneToMany(mappedBy = "country")
+    private List<Suppliers> suppliers;
 }

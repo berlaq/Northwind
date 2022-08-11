@@ -24,5 +24,12 @@ public class Suppliers {
     @OneToMany(mappedBy = "supplier")
     private List<Product> products;
 
+    @ManyToOne
+    @JoinColumn(name = "city_id",insertable = false,updatable = false)
+    private City city;
+
+    @ManyToOne
+    @JoinColumn(name = "country_id",insertable = false,updatable = false)
+    private Country country;
 
 }
