@@ -3,6 +3,8 @@ package com.etiya.northwind.api.controllers;
 import com.etiya.northwind.Business.Abstracts.CategoryService;
 import com.etiya.northwind.Business.Responses.Category.CategoryListResponse;
 import com.etiya.northwind.Business.requests.Category.CreateCategoryRequest;
+import com.etiya.northwind.core.utilities.results.DataResult;
+import com.etiya.northwind.core.utilities.results.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,30 +24,27 @@ public class CategoryController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<CategoryListResponse>> getAllCategory(){
-        return ResponseEntity.ok(this.categoryService.getAll());
+    public DataResult<List<CategoryListResponse>> getAllCategory(){
+        return this.categoryService.getAll();
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateCategory(@RequestBody @Valid CategoryListResponse categoryListResponse ){
-        this.categoryService.updateCategory(categoryListResponse);
-        return ResponseEntity.ok("Category is updated");
+    public Result updateCategory(@RequestBody @Valid CategoryListResponse categoryListResponse ){
+        return this.categoryService.updateCategory(categoryListResponse);
     }
 
     @DeleteMapping("/{categoryId}")
-    public ResponseEntity<String> deleteCategory(@PathVariable @Valid int categoryId ){
-        this.categoryService.deleteCategory(categoryId);
-        return ResponseEntity.ok("Category is deleted");
+    public Result deleteCategory(@PathVariable @Valid int categoryId ){
+       return this.categoryService.deleteCategory(categoryId);
     }
 
     @GetMapping("/{categoryId}")
-    public ResponseEntity<CategoryListResponse> getCategory(@PathVariable @Valid int categoryId){
-        return ResponseEntity.ok(this.categoryService.getCategoryById(categoryId));
+    public DataResult<CategoryListResponse> getCategory(@PathVariable @Valid int categoryId){
+        return this.categoryService.getCategoryById(categoryId);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String > createCategory(@RequestBody @Valid CreateCategoryRequest createCategoryRequest){
-        this.categoryService.addCategory(createCategoryRequest);
-        return  ResponseEntity.ok("Category is added");
+    public Result createCategory(@RequestBody @Valid CreateCategoryRequest createCategoryRequest){
+      return this.categoryService.addCategory(createCategoryRequest);
     }
 }

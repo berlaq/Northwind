@@ -13,4 +13,5 @@ public class EmployeeListResponse {
     private int employeeId;
     private String lastName;
     private String firstName;
+    private int reportsTo;
 }

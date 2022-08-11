@@ -11,13 +11,13 @@ import java.util.List;
 
 public interface ProductService {
     DataResult<List<ProductListResponse>> getAll();
-    void updateProduct(ProductListResponse productListResponse);
-    void deleteProduct(int productId);
-    ProductListResponse getProductById(int productId);
+    Result updateProduct(ProductListResponse productListResponse);
+    Result deleteProduct(int productId);
+    DataResult<ProductListResponse>  getProductById(int productId);
     Result addProduct(CreateProductRequest createProductRequest);
 
-    Page<ProductListResponse> getAllByPage(int page, int size);
-    Page<ProductListResponse>  getAllByPageWithField(int page,int size,String field);
-    Page<ProductListResponse>  getAllByPageWithOrder(int page,int size,String field,String order);
+    DataResult<Page<ProductListResponse>>  getAllByPage(int page, int size);
+    DataResult<Page<ProductListResponse>>  getAllByPageWithField(int page,int size,String field);
+    DataResult<Page<ProductListResponse>>  getAllByPageWithOrder(int page,int size,String field,String order);
 
 }

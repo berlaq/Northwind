@@ -10,6 +10,7 @@ import com.etiya.northwind.core.Exceptions.BusinessException;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import com.etiya.northwind.core.utilities.results.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,37 +42,44 @@ public class ProductManager implements ProductService {
                 .stream()
                 .map(product -> this.modelMapperService.forResponse().map(product, ProductListResponse.class))
                 .collect(Collectors.toList());
-        return new SuccessDataResult<List<ProductListResponse>>(productsDTO);
+        return new SuccessDataResult<>(productsDTO);
     }
 
     @Override
-    public void updateProduct(ProductListResponse productListResponse) {
+    public Result updateProduct(ProductListResponse productListResponse) {
+        checkIdExists(productListResponse.getProductId());
+        checkNameExist(productListResponse.getProductName());
         productRepository.save(modelMapperService.forRequest().map(productListResponse, Product.class));
+        return new SuccessResult("Ürün başarıyla güncellendi");
     }
 
+
+
     @Override
-    public void deleteProduct(int productId) {
+    public Result deleteProduct(int productId) {
+        checkIdExists(productId);
         this.productRepository.deleteById(productId);
+        return new SuccessResult("Ürün Başarıyla Silindi");
     }
 
     @Override
-    public ProductListResponse getProductById(int productId) {
+    public DataResult<ProductListResponse> getProductById(int productId) {
         var temp = this.productRepository.getReferenceById(productId);
         ProductListResponse productListResponse = modelMapperService.forResponse()
                 .map(temp, ProductListResponse.class);
-        return productListResponse;
+        return new SuccessDataResult<>(productListResponse);
     }
 
     @Override
     public Result addProduct(CreateProductRequest createProductRequest) {
         checkCategorySize(createProductRequest);
-
+        checkNameExist(createProductRequest.getProductName());
         this.productRepository.save(modelMapperService.forRequest().map(createProductRequest, Product.class));
         return new SuccessResult("ürün Eklendi");
     }
 
     @Override
-    public Page<ProductListResponse> getAllByPage(int page, int size) {
+    public DataResult<Page<ProductListResponse>> getAllByPage(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         var tempProduct = productRepository.findAll(pageable);
         Page<ProductListResponse> productListResponses = tempProduct.map(new Function<Product, ProductListResponse>() {
@@ -80,11 +89,11 @@ public class ProductManager implements ProductService {
                 return productListResponse;
             }
         });
-        return productListResponses;
+        return new SuccessDataResult<>(productListResponses);
     }
 
     @Override
-    public Page<ProductListResponse> getAllByPageWithField(int page, int size, String field) {
+    public DataResult<Page<ProductListResponse>> getAllByPageWithField(int page, int size, String field) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(field));
         var tempProduct = productRepository.findAll(pageable);
         Page<ProductListResponse> productListResponses = tempProduct.map(new Function<Product, ProductListResponse>() {
@@ -94,11 +103,11 @@ public class ProductManager implements ProductService {
                 return productListResponse;
             }
         });
-        return productListResponses;
+        return new SuccessDataResult<>(productListResponses);
     }
 
     @Override
-    public Page<ProductListResponse> getAllByPageWithOrder(int page, int size, String field, String order) {
+    public DataResult<Page<ProductListResponse>> getAllByPageWithOrder(int page, int size, String field, String order) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(order), field));
         var tempProduct = productRepository.findAll(pageable);
         Page<ProductListResponse> productListResponses = tempProduct.map(new Function<Product, ProductListResponse>() {
@@ -108,20 +117,27 @@ public class ProductManager implements ProductService {
                 return productListResponse;
             }
         });
-        return productListResponses;
+        return new SuccessDataResult<>(productListResponses);
     }
 
+
     private void checkCategorySize(CreateProductRequest createProductRequest){
-        int categoryId = createProductRequest.getCategoryId();
-        int total = 0;
-        List<Product> products = this.productRepository.findAll();
-        for (Product product : products) {
-            if (product.getCategory().getCategoryId() == categoryId) {
-                total += 1;
+        List<Product> products = this.productRepository.getByCategory_CategoryId(createProductRequest.getCategoryId());
+            if (products.size()>50) {
+                throw new BusinessException("Daha fazla ürün eklenemez");
             }
+    }
+    private void checkIdExists(int productId) {
+        Product product = productRepository.findById(productId).orElse(null);
+        if (product==null){
+            throw new BusinessException("BÖLE BİŞE YOK");
         }
-        if (total < 5) {
-            throw new BusinessException("Daha fazla ürün eklenemez");
+    }
+
+    private void checkNameExist(String name){
+        Product product = productRepository.findProductByProductName(name);
+        if (product!=null){
+            throw new BusinessException("BÖYLE BİR ÜRÜN ZATEN VAR!!!!");
         }
     }
 

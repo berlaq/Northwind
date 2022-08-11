@@ -34,20 +34,18 @@ public class ProductsController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateProduct(@RequestBody @Valid ProductListResponse productListResponse ){
-        this.productService.updateProduct(productListResponse);
-        return ResponseEntity.ok("Product is updated");
+    public Result updateProduct(@RequestBody @Valid ProductListResponse productListResponse ){
+       return this.productService.updateProduct(productListResponse);
     }
 
     @DeleteMapping("/{productId}")
-    public ResponseEntity<String> deleteProduct(@PathVariable @NotNull int productId ){
-        this.productService.deleteProduct(productId);
-        return ResponseEntity.ok("Product is deleted");
+    public Result deleteProduct(@PathVariable @NotNull int productId ){
+       return this.productService.deleteProduct(productId);
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<ProductListResponse> getProduct(@PathVariable @Max(5) int productId){
-        return ResponseEntity.ok(this.productService.getProductById(productId));
+    public DataResult<ProductListResponse> getProduct(@PathVariable @Max(5) int productId){
+        return this.productService.getProductById(productId);
     }
 
     @PostMapping("/create")
@@ -56,27 +54,27 @@ public class ProductsController {
     }
 
     @GetMapping("/getAllByPage")
-    public ResponseEntity<Page<ProductListResponse>> getAllProduct2(
+    public DataResult<Page<ProductListResponse>> getAllProduct2(
             @RequestParam(defaultValue = "0", name = "page") int page,
             @RequestParam(defaultValue = "5", name = "size") int size
     ){
-        return ResponseEntity.ok(this.productService.getAllByPage(page, size));
+        return this.productService.getAllByPage(page, size);
     }
     @GetMapping("/getAllByPageWithField")
-    public ResponseEntity<Page<ProductListResponse>> getAllProduct2(
+    public DataResult<Page<ProductListResponse>> getAllProduct2(
             @RequestParam(defaultValue = "0", name = "page") int page,
             @RequestParam(defaultValue = "5", name = "size") int size,
             @RequestParam(name = "Filtrele") String field
     ){
-        return ResponseEntity.ok(this.productService.getAllByPageWithField(page, size,field));
+        return this.productService.getAllByPageWithField(page, size,field);
     }
     @GetMapping("/getAllByPageWithOrder")
-    public ResponseEntity<Page<ProductListResponse>> getAllProduct2(
+    public DataResult<Page<ProductListResponse>> getAllProduct2(
             @RequestParam(defaultValue = "0", name = "page") int page,
             @RequestParam(defaultValue = "5", name = "size") int size,
             @RequestParam(name = "Filtrele") String field,
             @RequestParam(name = "Sırala") String order
     ){
-        return ResponseEntity.ok(this.productService.getAllByPageWithOrder(page, size,field,order));
+        return this.productService.getAllByPageWithOrder(page, size,field,order);
     }
 }

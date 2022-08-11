@@ -3,6 +3,7 @@ package com.etiya.northwind.Entities.Concretes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,5 +29,7 @@ public class Employee {
     @OneToMany(mappedBy = "employee")
     private List<Order> orders;
 
+    @Column(name = "reports_to")
+    private Integer reportsTo;
 
 }
