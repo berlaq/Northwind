@@ -4,6 +4,8 @@ import com.etiya.northwind.Business.Abstracts.ProductService;
 import com.etiya.northwind.Business.Responses.Orders.OrderListResponse;
 import com.etiya.northwind.Business.Responses.Products.ProductListResponse;
 import com.etiya.northwind.Business.requests.products.CreateProductRequest;
+import com.etiya.northwind.core.utilities.results.DataResult;
+import com.etiya.northwind.core.utilities.results.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ public class ProductsController {
     }
 
     @GetMapping("/getAll")
-    public List<ProductListResponse> getAll(){
+    public DataResult<List<ProductListResponse>>  getAll(){
         return this.productService.getAll();
     }
 
@@ -49,9 +51,8 @@ public class ProductsController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String > createProduct(@RequestBody @Valid CreateProductRequest createProductRequest){
-        this.productService.addProduct(createProductRequest);
-        return  ResponseEntity.ok("Product is added");
+    public Result createProduct(@RequestBody @Valid CreateProductRequest createProductRequest){
+       return this.productService.addProduct(createProductRequest);
     }
 
     @GetMapping("/getAllByPage")

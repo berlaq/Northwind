@@ -54,4 +54,5 @@ public class CategoryManager implements CategoryService {
     public void addCategory(CreateCategoryRequest createCategoryRequest) {
         categoryRepository.save(modelMapperService.forRequest().map(createCategoryRequest,Category.class));
     }
+
 }
