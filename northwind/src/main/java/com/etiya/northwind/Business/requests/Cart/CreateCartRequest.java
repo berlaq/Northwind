@@ -16,18 +16,18 @@ import java.util.List;
 @NoArgsConstructor
 public class CreateCartRequest {
 
-    @NotNull
-    @NotBlank
+
     private int productId;
+
 
     @NotNull
     @NotBlank
     private String customerId;
 
-    @NotNull
+
     private int quantity;
 
-    @NotNull
+
     private double unitPrice;
 
 }

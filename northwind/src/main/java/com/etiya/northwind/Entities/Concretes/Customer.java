@@ -28,7 +28,6 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Order> order;
 
-    @OneToOne
-    private Cart cart;
-
+    @OneToMany(mappedBy = "customer")
+    private List<Cart> carts;
 }

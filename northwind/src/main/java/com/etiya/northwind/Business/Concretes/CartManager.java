@@ -3,6 +3,7 @@ package com.etiya.northwind.Business.Concretes;
 import com.etiya.northwind.Business.Abstracts.CartService;
 import com.etiya.northwind.Business.Responses.Cart.CartListResponse;
 import com.etiya.northwind.Business.requests.Cart.CreateCartRequest;
+import com.etiya.northwind.Business.requests.Cart.UpdateCartRequest;
 import com.etiya.northwind.DataAccess.Abstracts.CartRepository;
 import com.etiya.northwind.DataAccess.Abstracts.mapping.ModelMapperService;
 import com.etiya.northwind.Entities.Concretes.Cart;
@@ -30,8 +31,8 @@ public class CartManager implements CartService {
     }
 
     @Override
-    public Result updateCart(CartListResponse cartListResponse) {
-        this.cartRepository.save(modelMapperService.forRequest().map(cartListResponse,Cart.class));
+    public Result updateCart(UpdateCartRequest updateCartRequest) {
+        this.cartRepository.save(modelMapperService.forRequest().map(updateCartRequest,Cart.class));
         return new SuccessResult("Güncellendi");
     }
 
@@ -42,8 +43,9 @@ public class CartManager implements CartService {
     }
 
     public Result deleteCart(String custId){
-        this.cartRepository.deleteByCustomerId(custId);
+        this.cartRepository.deleteAllByCustomer_CustomerId(custId);
         return new SuccessResult("Silindi");
     }
+
 
 }
