@@ -5,7 +5,7 @@ import com.etiya.northwind.Business.requests.customers.CreateCustomerRequest;
 import com.etiya.northwind.Entities.Concretes.Customer;
 import com.etiya.northwind.DataAccess.Abstracts.CustomerRepository;
 import com.etiya.northwind.Business.Abstracts.CustomerService;
-import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
+import com.etiya.northwind.DataAccess.Abstracts.mapping.ModelMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

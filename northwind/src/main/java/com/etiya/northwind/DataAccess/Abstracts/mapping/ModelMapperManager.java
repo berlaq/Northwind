@@ -1,4 +1,4 @@
-package com.etiya.northwind.core.utilities.mapping;
+package com.etiya.northwind.DataAccess.Abstracts.mapping;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

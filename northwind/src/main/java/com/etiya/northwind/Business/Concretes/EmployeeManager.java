@@ -1,15 +1,13 @@
 package com.etiya.northwind.Business.Concretes;
 
 
-import com.etiya.northwind.Business.Responses.Customers.CustomerListResponse;
 import com.etiya.northwind.Business.Responses.Employees.EmployeeListResponse;
 import com.etiya.northwind.Business.requests.Employee.CreateEmployeeRequest;
-import com.etiya.northwind.Entities.Concretes.Customer;
 import com.etiya.northwind.Entities.Concretes.Employee;
 import com.etiya.northwind.DataAccess.Abstracts.EmployeeRepository;
 import com.etiya.northwind.Business.Abstracts.EmployeeService;
 import com.etiya.northwind.core.Exceptions.BusinessException;
-import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
+import com.etiya.northwind.DataAccess.Abstracts.mapping.ModelMapperService;
 import com.etiya.northwind.core.utilities.results.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;

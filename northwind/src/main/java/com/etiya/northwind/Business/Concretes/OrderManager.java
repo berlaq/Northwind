@@ -2,12 +2,10 @@ package com.etiya.northwind.Business.Concretes;
 
 import com.etiya.northwind.Business.Responses.Orders.OrderListResponse;
 import com.etiya.northwind.Business.requests.orders.CreateOrderRequest;
-import com.etiya.northwind.DataAccess.Abstracts.OrderDetailsRepository;
-import com.etiya.northwind.Entities.Concretes.Customer;
 import com.etiya.northwind.Entities.Concretes.Order;
 import com.etiya.northwind.DataAccess.Abstracts.OrderRepository;
 import com.etiya.northwind.Business.Abstracts.OrderService;
-import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
+import com.etiya.northwind.DataAccess.Abstracts.mapping.ModelMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -3,14 +3,12 @@ package com.etiya.northwind.Business.Concretes;
 import com.etiya.northwind.Business.Responses.Products.ProductListResponse;
 import com.etiya.northwind.Business.requests.products.CreateProductRequest;
 import com.etiya.northwind.DataAccess.Abstracts.ProductRepository;
-import com.etiya.northwind.Entities.Concretes.Category;
 import com.etiya.northwind.Entities.Concretes.Product;
 import com.etiya.northwind.Business.Abstracts.ProductService;
 import com.etiya.northwind.core.Exceptions.BusinessException;
-import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
+import com.etiya.northwind.DataAccess.Abstracts.mapping.ModelMapperService;
 import com.etiya.northwind.core.utilities.results.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service

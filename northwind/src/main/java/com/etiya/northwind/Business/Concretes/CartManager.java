@@ -1,0 +1,49 @@
+package com.etiya.northwind.Business.Concretes;
+
+import com.etiya.northwind.Business.Abstracts.CartService;
+import com.etiya.northwind.Business.Responses.Cart.CartListResponse;
+import com.etiya.northwind.Business.requests.Cart.CreateCartRequest;
+import com.etiya.northwind.DataAccess.Abstracts.CartRepository;
+import com.etiya.northwind.DataAccess.Abstracts.mapping.ModelMapperService;
+import com.etiya.northwind.Entities.Concretes.Cart;
+import com.etiya.northwind.core.utilities.results.Result;
+import com.etiya.northwind.core.utilities.results.SuccessResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CartManager implements CartService {
+
+    private CartRepository cartRepository;
+    private ModelMapperService modelMapperService;
+
+    @Autowired
+    public CartManager(CartRepository cartRepository,ModelMapperService modelMapperService) {
+        this.cartRepository = cartRepository;
+        this.modelMapperService=modelMapperService;
+    }
+
+    @Override
+    public Result addCart(CreateCartRequest createCartRequest) {
+        this.cartRepository.save(modelMapperService.forRequest().map(createCartRequest, Cart.class));
+        return new SuccessResult("Eklendi");
+    }
+
+    @Override
+    public Result updateCart(CartListResponse cartListResponse) {
+        this.cartRepository.save(modelMapperService.forRequest().map(cartListResponse,Cart.class));
+        return new SuccessResult("Güncellendi");
+    }
+
+    @Override
+    public Result deleteCart(int cartId) {
+        this.cartRepository.deleteById(cartId);
+        return new SuccessResult("Silindi");
+    }
+
+    public Result deleteCart(String custId){
+        this.cartRepository.deleteByCustomerId(custId);
+        return new SuccessResult("Silindi");
+    }
+
+}

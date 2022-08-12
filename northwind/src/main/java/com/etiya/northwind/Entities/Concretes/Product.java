@@ -36,5 +36,8 @@ public class Product {
     @JoinColumn(name = "supplier_id")
     private Suppliers supplier;
 
+    @ManyToOne()
+    private Cart cart;
+
 
 }

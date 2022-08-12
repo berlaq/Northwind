@@ -5,7 +5,7 @@ import com.etiya.northwind.Business.Responses.Suppliers.SupplierListResponse;
 import com.etiya.northwind.Business.requests.Supplier.CreateSupplierRequest;
 import com.etiya.northwind.DataAccess.Abstracts.SupplierRepository;
 import com.etiya.northwind.Entities.Concretes.Suppliers;
-import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
+import com.etiya.northwind.DataAccess.Abstracts.mapping.ModelMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
