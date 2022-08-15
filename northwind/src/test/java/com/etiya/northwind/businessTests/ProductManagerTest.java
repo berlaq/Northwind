@@ -50,10 +50,11 @@ public class ProductManagerTest {
     @Test
     public void add_product_test(){
 
-        var temp = createProductRequest();
-        productService.addProduct(temp);
+        var createProductRequest = createProductRequest();
+        productService.addProduct(createProductRequest);
 
-        Mockito.verify(productRepository,Mockito.times(1)).save(modelMapperService.forRequest().map(temp,Product.class));
+        Mockito.verify(productRepository,Mockito.times(1)).save(modelMapperService
+                .forRequest().map(createProductRequest,Product.class));
     }
 
     @Test
@@ -102,6 +103,5 @@ public class ProductManagerTest {
         productListResponse.setProductId(1);
         return productListResponse;
     }
-
 
 }
