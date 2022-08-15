@@ -6,7 +6,7 @@ import com.etiya.northwind.DataAccess.Abstracts.ProductRepository;
 import com.etiya.northwind.Entities.Concretes.Product;
 import com.etiya.northwind.Business.Abstracts.ProductService;
 import com.etiya.northwind.core.Exceptions.BusinessException;
-import com.etiya.northwind.DataAccess.Abstracts.mapping.ModelMapperService;
+import com.etiya.northwind.core.mapping.ModelMapperService;
 import com.etiya.northwind.core.utilities.results.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,7 +47,7 @@ public class ProductManager implements ProductService {
         checkIdExists(productListResponse.getProductId());
         checkNameExist(productListResponse.getProductName());
         productRepository.save(modelMapperService.forRequest().map(productListResponse, Product.class));
-        return new SuccessResult("Ürün başarıyla güncellendi");
+        return new SuccessResult("Product updated");
     }
 
 
@@ -72,7 +72,7 @@ public class ProductManager implements ProductService {
         checkCategorySize(createProductRequest);
         checkNameExist(createProductRequest.getProductName());
         this.productRepository.save(modelMapperService.forRequest().map(createProductRequest, Product.class));
-        return new SuccessResult("ürün Eklendi");
+        return new SuccessResult("Product Added");
     }
 
     @Override
@@ -120,14 +120,14 @@ public class ProductManager implements ProductService {
 
     private void checkCategorySize(CreateProductRequest createProductRequest){
         List<Product> products = this.productRepository.getByCategory_CategoryId(createProductRequest.getCategoryId());
-            if (products.size()>50) {
+            if (products.size()>0) {
                 throw new BusinessException("Daha fazla ürün eklenemez");
             }
     }
     private void checkIdExists(int productId) {
         Product product = productRepository.findById(productId).orElse(null);
         if (product==null){
-            throw new BusinessException("BÖLE BİŞE YOK");
+            throw new BusinessException("BÖYLE BİR ÜRÜN YOK");
         }
     }
 

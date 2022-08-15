@@ -20,14 +20,13 @@ public class Cart {
     @Column(name = "cart_id")
     private int cartId;
 
-
-    @OneToMany()
+    @ManyToOne
     @JoinColumn(name = "product_id")
-    private List<Product> products;
+    private Product product;
 
-
-    @OneToOne
-    private Customer customerId;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     @Column(name = "quantity")
     private int quantity;

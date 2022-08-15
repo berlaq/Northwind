@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SpringBootApplication
-@RestControllerAdvice/// Tüm uygulamada çalışması için
+@RestControllerAdvice
 public class NorthwindApplication {
 
 	public static void main(String[] args) {

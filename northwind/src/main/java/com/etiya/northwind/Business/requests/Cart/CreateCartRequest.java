@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 @Data
@@ -16,18 +17,17 @@ import java.util.List;
 @NoArgsConstructor
 public class CreateCartRequest {
 
-    @NotNull
-    @NotBlank
+
     private int productId;
 
     @NotNull
     @NotBlank
     private String customerId;
 
-    @NotNull
+    @PositiveOrZero
     private int quantity;
 
-    @NotNull
+    @PositiveOrZero
     private double unitPrice;
 
 }

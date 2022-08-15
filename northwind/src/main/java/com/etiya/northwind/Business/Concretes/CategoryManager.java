@@ -6,7 +6,7 @@ import com.etiya.northwind.Business.requests.Category.CreateCategoryRequest;
 import com.etiya.northwind.DataAccess.Abstracts.CategoryRepository;
 import com.etiya.northwind.Entities.Concretes.Category;
 import com.etiya.northwind.core.Exceptions.BusinessException;
-import com.etiya.northwind.DataAccess.Abstracts.mapping.ModelMapperService;
+import com.etiya.northwind.core.mapping.ModelMapperService;
 import com.etiya.northwind.core.utilities.results.DataResult;
 import com.etiya.northwind.core.utilities.results.Result;
 import com.etiya.northwind.core.utilities.results.SuccessDataResult;

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import com.etiya.northwind.Business.requests.OrderDetail.CreateOrderDetailRequest;
 import com.etiya.northwind.Entities.Concretes.OrderDetailsId;
-import com.etiya.northwind.DataAccess.Abstracts.mapping.ModelMapperService;
+import com.etiya.northwind.core.mapping.ModelMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

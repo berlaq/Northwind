@@ -16,6 +16,7 @@ public interface ProductService {
     DataResult<ProductListResponse>  getProductById(int productId);
     Result addProduct(CreateProductRequest createProductRequest);
 
+
     DataResult<Page<ProductListResponse>>  getAllByPage(int page, int size);
     DataResult<Page<ProductListResponse>>  getAllByPageWithField(int page,int size,String field);
     DataResult<Page<ProductListResponse>>  getAllByPageWithOrder(int page,int size,String field,String order);

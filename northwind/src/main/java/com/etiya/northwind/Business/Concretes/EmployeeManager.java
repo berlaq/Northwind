@@ -7,7 +7,7 @@ import com.etiya.northwind.Entities.Concretes.Employee;
 import com.etiya.northwind.DataAccess.Abstracts.EmployeeRepository;
 import com.etiya.northwind.Business.Abstracts.EmployeeService;
 import com.etiya.northwind.core.Exceptions.BusinessException;
-import com.etiya.northwind.DataAccess.Abstracts.mapping.ModelMapperService;
+import com.etiya.northwind.core.mapping.ModelMapperService;
 import com.etiya.northwind.core.utilities.results.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

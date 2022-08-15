@@ -17,19 +17,13 @@ import java.util.List;
 @NoArgsConstructor
 public class UpdateCartRequest {
 
-    @NotBlank
-    @NotNull
+
     private int cartId;
 
-    @NotBlank
-    @NotNull
     private int productId;
 
-    @NotBlank
-    @NotNull
-    private int customerId;
+    private String customerId;
 
-    @NotNull
     @PositiveOrZero
     private int quantity;
 
