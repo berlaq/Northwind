@@ -1,12 +1,9 @@
 package com.etiya.northwind.businessTests;
 
-import com.etiya.northwind.Business.Abstracts.ProductService;
 import com.etiya.northwind.Business.Abstracts.SupplierService;
-import com.etiya.northwind.Business.Concretes.ProductManager;
 import com.etiya.northwind.Business.Concretes.SupplierManager;
 import com.etiya.northwind.Business.Responses.Suppliers.SupplierListResponse;
 import com.etiya.northwind.Business.requests.Supplier.CreateSupplierRequest;
-import com.etiya.northwind.DataAccess.Abstracts.ProductRepository;
 import com.etiya.northwind.DataAccess.Abstracts.SupplierRepository;
 import com.etiya.northwind.Entities.Concretes.Suppliers;
 import com.etiya.northwind.core.mapping.ModelMapperManager;
@@ -16,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
 
-import java.util.Optional;
 
 public class SupplierManagerTest {
     private SupplierService supplierService;
@@ -34,17 +30,15 @@ public class SupplierManagerTest {
     }
 
     @Test
-    public void add_product(){
+    public void add_supplier_test(){
         var createSupplierRequest = createSupplierRequest();
         supplierService.addSupplier(createSupplierRequest);
 
-        Mockito.verify(supplierRepository,Mockito.times(1)).save(modelMapperService.
-                forRequest()
-                .map(createSupplierRequest,Suppliers.class));
+        Mockito.verify(supplierRepository,Mockito.times(1)).save(Mockito.any());
     }
 
     @Test
-    public void update_product_test(){
+    public void update_supplier_test(){
         SupplierListResponse supplierListResponse = supplierListResponse();
         Suppliers expected = modelMapperService.forRequest().map(supplierListResponse,Suppliers.class);
 
@@ -56,7 +50,7 @@ public class SupplierManagerTest {
     }
 
     @Test
-    public void delete_product_test(){
+    public void delete_supplier_test(){
         supplierService.deleteSupplier(Mockito.anyInt());
         Mockito.verify(supplierRepository,Mockito.times(1)).deleteById(Mockito.anyInt());
     }
@@ -75,8 +69,6 @@ public class SupplierManagerTest {
 
     private SupplierListResponse supplierListResponse(){
         SupplierListResponse supplierListResponse = new SupplierListResponse();
-        supplierListResponse.setSupplierId(1);
-        supplierListResponse.setCompanyName("TEST LTD STI");
         return supplierListResponse;
     }
 }
